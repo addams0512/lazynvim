@@ -11,19 +11,33 @@ keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" }) -- decremen
 -- clear search highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 
--- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
-
 -- New tab
-keymap.set("n", "te", ":tabedit<Return>")
-keymap.set("n", "tx", ":tabclose<Return>")
+keymap.set("n", "<leader>te", ":tabedit<Return>")
+keymap.set("n", "<leader>tx", ":tabclose<Return>")
 keymap.set("n", "<tab>", ":tabnext<Return>", opts)
 keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
--- Split window
 
-keymap.set("n", "sv", ":vsplit<Return>", opts)
-keymap.set("n", "ss", ":split<Return>", opts)
-keymap.set("n", "sx", ":close<Return>", opts)
+-- Delete single word without copying to clipboard
+keymap.set("n", "x", '"_x')
+
+-- Split window
+keymap.set("n", "<leader>_", ":split<Return>", opts)
+keymap.set("n", "<leader>sx", ":close<Return>", opts)
+
+-- Code fold
+vim.o.foldcolumn = "1" -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+
+require("ufo").setup({
+  provider_selector = function(bufnr, filetype, buftype)
+    return { "lsp", "indent" }
+  end,
+})
 
 -- Toggle term
 function _G.set_terminal_keymaps()

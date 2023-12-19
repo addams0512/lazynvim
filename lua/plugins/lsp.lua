@@ -43,8 +43,8 @@ return {
                 includeInlayVariableTypeHints = false,
                 includeInlayPropertyDeclarationTypeHints = true,
                 includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
               },
+              includeInlayEnumMemberValueHints = true,
             },
             javascript = {
               inlayHints = {

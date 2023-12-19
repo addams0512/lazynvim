@@ -20,7 +20,7 @@ return {
 
       return {
         completion = {
-          completeopt = "menu,menuone,noinsert",
+          completeopt = "menu,menuone,preview,noselect",
         },
         window = {
           completion = cmp.config.window.bordered(),

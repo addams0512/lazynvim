@@ -12,13 +12,40 @@ return {
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
       local cmp = require("cmp")
 
-      local defaults = require("cmp.config.default")()
+      local types = require("cmp.types")
+
+      local function deprioritize_snippet(entry1, entry2)
+        if entry1:get_kind() == types.lsp.CompletionItemKind.Snippet then
+          return false
+        end
+        if entry2:get_kind() == types.lsp.CompletionItemKind.Snippet then
+          return true
+        end
+      end
 
       local lspkind = require("lspkind")
 
       return {
+        sorting = {
+          priority_weight = 2,
+          comparators = {
+            deprioritize_snippet,
+            -- the rest of the comparators are pretty much the defaults
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.scopes,
+            cmp.config.compare.score,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.locality,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          },
+        },
         completion = {
           completeopt = "menu,menuone,preview,noselect",
         },
@@ -32,9 +59,7 @@ return {
           end,
         },
         mapping = cmp.mapping.preset.insert({
-          -- ["<Tab>"] = cmp.mapping.select_next_item(),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<C-s>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<C-k>"] = cmp.mapping.select_prev_item(),
           ["<C-j>"] = cmp.mapping.select_next_item(),
@@ -60,7 +85,6 @@ return {
             hl_group = "CmpGhostText",
           },
         },
-        sorting = defaults.sorting,
       }
     end,
     ---@param opts cmp.ConfigSchema

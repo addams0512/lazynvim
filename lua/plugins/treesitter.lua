@@ -21,6 +21,11 @@ return {
         "sql",
         "svelte",
         "python",
+        "typescript",
+        "javascript",
+        "tsx",
+        "lua",
+        "vim",
       },
 
       matchup = {

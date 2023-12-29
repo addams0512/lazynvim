@@ -1,4 +1,9 @@
 return {
+  {
+    "folke/tokyonight.nvim",
+    lazy = true,
+    opts = { style = "moon" },
+  },
   -- meesage, cmdline, and the popup menu
   {
     "folke/noice.nvim",
@@ -59,16 +64,6 @@ return {
     },
   },
 
-  -- statusline
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    opts = {
-      options = {
-        theme = "everforest",
-      },
-    },
-  },
   -- bufferline
   {
     "akinsho/bufferline.nvim",

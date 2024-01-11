@@ -13,6 +13,7 @@ return {
   {
     "mg979/vim-visual-multi",
   },
+
   {
     "akinsho/toggleterm.nvim",
     version = "*",

@@ -1,10 +1,70 @@
 return {
+  -- filename
+  {
+    "b0o/incline.nvim",
+    event = "BufReadPre",
+    priority = 1200,
+    config = function()
+      require("incline").setup({
+        highlight = {
+          groups = {
+            InclineNormal = { guibg = "#E95678", guifg = "#1C1E26" },
+            InclineNormalNC = { guifg = "#B5D1E9" },
+          },
+        },
+        window = { margin = { vertical = 0, horizontal = 1 } },
+        hide = {
+          cursorline = true,
+        },
+        render = function(props)
+          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+          if vim.bo[props.buf].modified then
+            filename = "[+] " .. filename
+          end
+
+          local icon, color = require("nvim-web-devicons").get_icon_color(filename)
+          return { { icon, guifg = color }, { " " }, { filename } }
+        end,
+      })
+    end,
+  },
+  -- meesage, cmdline, and the popup menu
   {
     "folke/tokyonight.nvim",
     lazy = true,
-    opts = { style = "moon" },
+    config = function()
+      local bg = "#011628"
+      local bg_dark = "#011423"
+      local bg_highlight = "#143652"
+      local bg_search = "#0A64AC"
+      local bg_visual = "#275378"
+      local fg = "#CBE0F0"
+      local fg_dark = "#B4D0E9"
+      local fg_gutter = "#627E97"
+      local border = "#547998"
+
+      require("tokyonight").setup({
+        style = "night",
+        on_colors = function(colors)
+          colors.bg = bg
+          colors.bg_dark = bg_dark
+          colors.bg_float = bg_dark
+          colors.bg_highlight = bg_highlight
+          colors.bg_popup = bg_dark
+          colors.bg_search = bg_search
+          colors.bg_sidebar = bg_dark
+          colors.bg_statusline = bg_dark
+          colors.bg_visual = bg_visual
+          colors.border = border
+          colors.fg = fg
+          colors.fg_dark = fg_dark
+          colors.fg_float = fg
+          colors.fg_gutter = fg_gutter
+          colors.fg_sidebar = fg_dark
+        end,
+      })
+    end,
   },
-  -- meesage, cmdline, and the popup menu
   {
     "folke/noice.nvim",
     opts = function(_, opts)
@@ -97,7 +157,13 @@ return {
       opts.scroll = { enable = false }
     end,
   },
-
+  -- lualine
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = {
+      options = { theme = "horizon" },
+    },
+  },
   -- zen mode
   {
     "folke/zen-mode.nvim",

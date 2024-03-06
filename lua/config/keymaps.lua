@@ -23,6 +23,7 @@ keymap.set("n", "x", '"_x')
 -- Split window
 keymap.set("n", "<leader>_", ":split<Return>", opts)
 keymap.set("n", "<leader>sx", ":close<Return>", opts)
+keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
 
 -- Code fold
 vim.o.foldcolumn = "1" -- '0' is not bad

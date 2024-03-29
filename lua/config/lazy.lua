@@ -34,6 +34,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.formatting.prettier" },
     -- Linting
     { import = "lazyvim.plugins.extras.linting.eslint" },
+    -- harpoon
+    { import = "lazyvim.plugins.extras.editor.harpoon2" },
     -- import/override with your plugins
     { import = "plugins" },
   },

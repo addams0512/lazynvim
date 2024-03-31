@@ -8,7 +8,7 @@ return {
       require("incline").setup({
         highlight = {
           groups = {
-            InclineNormal = { guibg = "#FF7B72", guifg = "#1C1E26" },
+            InclineNormal = { guibg = "#F7768E", guifg = "#1C1E26" },
             InclineNormalNC = { guifg = "#B5D1E9" },
           },
         },
@@ -30,16 +30,14 @@ return {
   },
   -- colorscheme
   {
-    "projekt0n/github-nvim-theme",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1500,
     config = function()
-      require("github-theme").setup({
-        options = {
-          transparent = false,
-        },
+      require("tokyonight").setup({
+        style = "night",
+        transparent = false,
       })
-      vim.cmd("colorscheme github_dark_dimmed")
     end,
   },
 

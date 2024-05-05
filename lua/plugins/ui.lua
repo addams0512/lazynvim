@@ -8,7 +8,7 @@ return {
       require("incline").setup({
         highlight = {
           groups = {
-            InclineNormal = { guibg = "#F7768E", guifg = "#1C1E26" },
+            InclineNormal = { guibg = "#E76671", guifg = "#1C1E26" },
             InclineNormalNC = { guifg = "#B5D1E9" },
           },
         },
@@ -28,19 +28,14 @@ return {
       })
     end,
   },
+
   -- colorscheme
   {
     "folke/tokyonight.nvim",
     lazy = false,
-    priority = 1500,
-    config = function()
-      require("tokyonight").setup({
-        style = "night",
-        transparent = false,
-      })
-    end,
+    priority = 1000,
+    opts = { style = "moon" },
   },
-
   -- noice
   {
     "folke/noice.nvim",
